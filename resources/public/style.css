@@ -2,8 +2,9 @@
 
 :root {
     --background: #eee;
+    --primary: #0d6efd;
     --device-frame-color: #000;
-    --device-screen-color: #181818;
+    --device-screen-color: #252525;
 }
 
 /* General */
@@ -12,16 +13,20 @@ body {
     background-color: var(--background);
 }
 
-/* Device */
+/* Devices */
 
 .device {
+    position: relative;
     width: 100%;
     border-radius: 10px;
-    padding-bottom: 150%;
+    padding-bottom: 140%;
     background-color: var(--device-frame-color);
 }
 
 .device .device-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     left: 5%;
     top: 5%;
@@ -30,4 +35,22 @@ body {
     background-color: var(--device-screen-color);
     padding: 20px;
     color: white;
+    transition: background-color 800ms ease;
+}
+
+.device.device-locked .device-inner {
+    background-color: var(--primary);
+}
+
+.device progress {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.device progress::-webkit-progress-value {
+    background: var(--device-frame-color);
+}
+
+.device progress::-webkit-progress-bar {
+    background: white;
 }
