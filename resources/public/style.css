@@ -1,0 +1,33 @@
+/* General */
+
+:root {
+    --background: #eee;
+    --device-frame-color: #000;
+    --device-screen-color: #181818;
+}
+
+/* General */
+
+body {
+    background-color: var(--background);
+}
+
+/* Device */
+
+.device {
+    width: 100%;
+    border-radius: 10px;
+    padding-bottom: 150%;
+    background-color: var(--device-frame-color);
+}
+
+.device .device-inner {
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    height: 90%;
+    width: 90%;
+    background-color: var(--device-screen-color);
+    padding: 20px;
+    color: white;
+}
