@@ -71,7 +71,7 @@
   (fn [{db :db} [_ current-time]]
     (when-not (nil? (:timestamp db))
       (let [elapsed-time (- current-time (:timestamp db))]
-        (if (>= elapsed-time config/auto-unlock-milliseconds)
+        (if (>= elapsed-time config/auto-unlock-in)
           (do
             (logger/log :notice
                         "The user's locked device, "
@@ -115,7 +115,7 @@
        [:h3 "Locked, in use"]
        [:h6 "Automatically unlocks in..."]
        [:progress {:value (get-elapsed-time-progress device-id)
-                   :max   config/auto-unlock-milliseconds
+                   :max   config/auto-unlock-in
                    :class "w-100 mb-3"}]]
 
       [:div.text-center
