@@ -2,12 +2,13 @@
   (:require
     [re-frame.core :as re-frame]))
 
-(defn log [type message]
-  (case type
-    :success (re-frame/dispatch [:logger-log "SUCCESS: " message])
-    :failure (re-frame/dispatch [:logger-log "FAILURE: " message])
-    :warning (re-frame/dispatch [:logger-log "WARNING: " message])
-    (re-frame/dispatch [:logger-log "NOTICE: " message])))
+(defn log [type & messages]
+  (let [message (apply str messages)]
+    (case type
+      :success (re-frame/dispatch [:logger-log "SUCCESS: " message])
+      :failure (re-frame/dispatch [:logger-log "FAILURE: " message])
+      :warning (re-frame/dispatch [:logger-log "WARNING: " message])
+      (re-frame/dispatch [:logger-log "NOTICE: " message]))))
 
 (re-frame.core/reg-event-fx
   :logger-log

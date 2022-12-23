@@ -26,13 +26,20 @@
       ;; Checks if the owner already has a device locked.
       (if owner-has-locked-device?
         (if is-device-locked?
-          (logger/log :warning (str "User (" owner-id "), device (" device-id ") is already locked."))
-          (logger/log :failure (str "User (" owner-id "), has another locked device.")))
-
-        (do (logger/log :success (str "User (" owner-id "), locked device (" device-id ")."))
-            {:db (-> db
-                     (assoc :devices (conj devices device-entry))
-                     (assoc :timestamp (js/Date.now)))})))))
+          (logger/log :warning
+                      "User (" owner-id "), "
+                      "device (" device-id "), "
+                      "is already locked!")
+          (logger/log :failure
+                      "User (" owner-id "), "
+                      "already has another locked device."))
+        (do
+          (logger/log :success
+                      "User (" owner-id "), "
+                      "locked device (" device-id ")!")
+          {:db (-> db
+                   (assoc :devices (conj devices device-entry))
+                   (assoc :timestamp (js/Date.now)))})))))
 
 (re-frame.core/reg-event-fx
   :device-unlock
@@ -41,16 +48,23 @@
           remove-matching-device (fn [device] (not= device device-entry))
           owner-has-locked-device? (has-device-with? devices :owner owner-id)
           is-device-locked? (has-device-with? devices :device device-id)]
-      (if is-device-locked?
 
-        (do (logger/log :success (str "User (" owner-id "), unlocked device (" device-id ")."))
-            {:db (-> db (assoc :devices (filter remove-matching-device devices))
-                     (assoc :timestamp nil)
-                     (assoc :timestamp-elapsed nil))})
+      (if is-device-locked?
+        (do
+          (logger/log :success
+                      "User (" owner-id "), "
+                      "unlocked device (" device-id ")!")
+          {:db (-> db (assoc :devices (filter remove-matching-device devices))
+                   (assoc :timestamp nil)
+                   (assoc :timestamp-elapsed nil))})
 
         (if owner-has-locked-device?
-          (logger/log :failure (str "User (" owner-id "), has another device that's currently locked."))
-          (logger/log :failure (str "User (" owner-id "), currently has no locked devices.")))))))
+          (logger/log :failure
+                      "User (" owner-id "), "
+                      "has another device that locked!")
+          (logger/log :warning
+                      "User (" owner-id "), "
+                      "has no locked devices!"))))))
 
 (re-frame.core/reg-event-fx
   :device-ping-auto-unlock
@@ -59,7 +73,9 @@
       (let [elapsed-time (- current-time (:timestamp db))]
         (if (>= elapsed-time config/auto-unlock-milliseconds)
           (do
-            (logger/log :notice "User device has automatically been unlocked.")
+            (logger/log :notice
+                        "The user's locked device, "
+                        "has automatically been unlocked.")
             {:db (-> db
                      (assoc :devices [])
                      (assoc :timestamp nil)
