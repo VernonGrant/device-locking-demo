@@ -1,7 +1,7 @@
 (ns device-locking.ui
   (:require
     [reagent.dom :as re-dom]
-    [device-locking.components.database-printer :as db-reflector]
+    [device-locking.components.database-logger :as db-reflector]
     [device-locking.components.logger :as logger]
     [device-locking.components.device :as device]))
 
@@ -14,7 +14,7 @@
         [:div {:class "col-12 col-md-6"}
          (logger/logger-ui)]
         [:div {:class "col-12 col-md-6"}
-         (db-reflector/database-printer-ui)]]]]
+         (db-reflector/database-logger-ui)]]]]
      [:section.py-4
       [:div.container
        [:div {:class "row gy-5"}
