@@ -11,7 +11,7 @@
         (assoc :timestamp nil)
         (assoc :timestamp-elapsed nil))))
 
-;; Registered global data subscribers:
+;; Register state subscribers:
 
 (re-frame/reg-sub
   :devices
