@@ -125,7 +125,7 @@
 (defn device-actions-ui
   "Returns the user interface for a device's actions section."
   [owner-id device-id]
-  [:div {:class "text-center"}
+  [:div.text-center
    [:h5 {:class "pb-2 border-bottom"} "Actions"]
    [:button {:class    "btn btn-light w-100 mb-2"
              :on-click #(re-frame.core/dispatch [:device-lock

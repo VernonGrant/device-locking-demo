@@ -12,7 +12,7 @@
   "Returns the database logger user interface."
   []
   [:div
-   [:h4 {:class "mb-3"} "Database:"]
+   [:h4.mb-3 "Database:"]
    [:textarea {:class "form-control"
                :readOnly true
                :value (get-devices-array-as-json)

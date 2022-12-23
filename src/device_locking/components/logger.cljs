@@ -29,7 +29,7 @@
 
 (defn logger-ui []
   [:div
-   [:h4 {:class "mb-3"} "Logger:"]
+   [:h4.mb-3 "Logger:"]
    [:textarea {:class    "form-control"
                :readOnly true
                :rows     10
