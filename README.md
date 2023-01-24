@@ -1,6 +1,6 @@
 # Device Locking Demo
 
-[View Online](http://188.166.147.241/). Makes use of [Re-frame](https://day8.github.io/re-frame/) and [ClojureScript](https://clojurescript.org/).
+Makes use of [Re-frame](https://day8.github.io/re-frame/) and [ClojureScript](https://clojurescript.org/).
 
 ![Device locking demo screenshot](./screenshot.jpg "Title")
 
